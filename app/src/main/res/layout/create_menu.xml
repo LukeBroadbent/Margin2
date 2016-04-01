@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:fitsSystemWindows="true">
+
+
+
+    <GridLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentEnd="true">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/back_button"
+        android:id="@+id/bBack"
+        android:layout_row="0"
+        android:layout_column="6"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/submit_button"
+        android:id="@+id/bSubmit"
+        android:layout_row="0"
+        android:layout_column="0"
+        android:layout_marginLeft="10dp" />
+</GridLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="40dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Create New Event"
+            android:id="@+id/textView5"
+            android:textColor="#6469ab"
+            android:layout_marginLeft="10dp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/eventName"
+            android:singleLine = "true"
+            android:layout_below="@+id/linearLayout5"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="10dp"
+            android:hint="Enter Event Name"
+            android:textColor="#6469ab"
+            android:textColorHint="#6469ab" />
+    </LinearLayout>
+
+</RelativeLayout>
+
