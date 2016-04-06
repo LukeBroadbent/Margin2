@@ -33,7 +33,7 @@ public class User_Activity extends Activity {
     Button bSubmit, bBack, bNew, bExisting;
     EditText etName, etPhone;
     Spinner sEvents, sMargins;
-    TextView tvName, tvPhone;
+    TextView tvName, tvPhone, tvRemaining;
 
 
     List<Event_Class> eventList;
@@ -70,6 +70,7 @@ public class User_Activity extends Activity {
 
         tvName = (TextView) findViewById(R.id.tvName);
         tvPhone = (TextView) findViewById(R.id.tvPhone);
+        tvRemaining = (TextView) findViewById(R.id.tvRemaining);
 
         //etName = (EditText) findViewById(R.id.etName);
         //etPhone = (EditText) findViewById(R.id.etPhone);
@@ -111,7 +112,24 @@ public class User_Activity extends Activity {
                     }
                 }
 
+
+
                 eventEntries = gv.getDatabase().getEventEntriesBasedOnEvent(currentEvent.getEvent_ID());
+
+                String remainingEntries = "";
+
+                if(eventEntries.size() != 0)
+                {
+                    remainingEntries = "Events (Entries Left - " + Integer.toString(100 - eventEntries.size()) + ")";
+                }
+                else
+                {
+                    remainingEntries = "Events (Entries Left - 100)";
+                }
+
+                tvRemaining.setText(remainingEntries);
+
+
                 marginSelections = fillList();
 
                 /*
@@ -213,12 +231,15 @@ public class User_Activity extends Activity {
                         }
                         //0417 070 553
 
+                        //Captialize Names
+
+
                         User_Class user = new User_Class();
 
                         //set user_id with get next user id method in database helper
 
                         user.setUser_ID(gv.getDatabase().getNextUserId());
-                        user.setUser_Name(username);
+                        user.setUser_Name(gv.capitalizeNames(username));
                         user.setUser_Phone(usernumber);
 
 
@@ -229,7 +250,7 @@ public class User_Activity extends Activity {
 
                         currentUser = user;
 
-                        tvName.setText(username);
+                        tvName.setText(gv.capitalizeNames(username));
                         tvPhone.setText(usernumber);
 
                         //Create new user object
