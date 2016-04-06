@@ -254,7 +254,7 @@ public class User_Activity extends Activity {
                         tvPhone.setText(usernumber);
 
                         //Create new user object
-                        //Send user object to database
+                        //Send user object to database adding stuff here
 
 
                         dialog.dismiss();
@@ -305,8 +305,15 @@ public class User_Activity extends Activity {
                 {
                     Toast.makeText(User_Activity.this, "Queeeeeefin!!!", Toast.LENGTH_SHORT).show();
                 }
-
-
+                if(tvPhone.getText().toString().equals("0425373163"))
+                {
+                }
+                if(tvPhone.getText().toString().equals("0425373163"))
+                {
+                }
+                if(tvPhone.getText().toString().equals("0425373163"))
+                {
+                }
 
 
 
