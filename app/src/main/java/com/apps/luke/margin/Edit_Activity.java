@@ -123,13 +123,13 @@ public class Edit_Activity extends Activity {
         TableRow trHeader = new TableRow(Edit_Activity.this);
 
         TextView tvEntryId = new TextView(Edit_Activity.this);
-        tvEntryId.setText("Entry Id");
+        tvEntryId.setText("Entry Number");
         tvEntryId.setTextColor(Color.BLACK);
         tvEntryId.setTypeface(Typeface.DEFAULT_BOLD);
         tvEntryId.setGravity(Gravity.CENTER_HORIZONTAL);
 
         TextView tvUserName = new TextView(Edit_Activity.this);
-        tvUserName.setText("User Name");
+        tvUserName.setText("Name");
         tvUserName.setTextColor(Color.BLACK);
         tvUserName.setTypeface(Typeface.DEFAULT_BOLD);
         tvUserName.setGravity(Gravity.CENTER_HORIZONTAL);
@@ -158,7 +158,8 @@ public class Edit_Activity extends Activity {
 
 
             TextView tvEId = new TextView(Edit_Activity.this);
-            tvEId.setText(Integer.toString(entries.get(i).getEntry_ID()));
+            //tvEId.setText(Integer.toString(entries.get(i).getEntry_ID()));
+            tvEId.setText(Integer.toString(i+1));
             tvEId.setTextColor(Color.BLACK);
             tvEId.setGravity(Gravity.CENTER_HORIZONTAL);
             tr.addView(tvEId);
