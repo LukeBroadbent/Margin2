@@ -148,7 +148,7 @@ public class Past_Activity extends Activity {
         TableRow trHeader = new TableRow(Past_Activity.this);
 
         TextView tvEntryId = new TextView(Past_Activity.this);
-        tvEntryId.setText("Entry Id");
+        tvEntryId.setText("Entry Number");
         tvEntryId.setTextColor(Color.BLACK);
         tvEntryId.setTypeface(Typeface.DEFAULT_BOLD);
         tvEntryId.setGravity(Gravity.CENTER_HORIZONTAL);
@@ -183,7 +183,7 @@ public class Past_Activity extends Activity {
 
 
             TextView tvEId = new TextView(Past_Activity.this);
-            tvEId.setText(Integer.toString(entries.get(i).getEntry_ID()));
+            tvEId.setText(Integer.toString(i+1));
             tvEId.setTextColor(Color.BLACK);
             tvEId.setGravity(Gravity.CENTER_HORIZONTAL);
             tr.addView(tvEId);

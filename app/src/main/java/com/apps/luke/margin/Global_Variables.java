@@ -112,4 +112,40 @@ public class Global_Variables extends Application {
         return marginList;
     }
 
+    public String capitalizeNames(String name)
+    {
+        String returnName = "";
+
+        String[] split = name.split(" ");
+        if(split.length > 1)
+        {
+            for(int i = 0; i < split.length; i++)
+            {
+                String output = split[i].substring(0, 1).toUpperCase() + split[i].substring(1);
+                //.d("Output", output);
+                split[i] = output;
+                //Log.d("Split[i]", split[i]);
+            }
+
+            StringBuilder builder = new StringBuilder();
+
+            for (String string : split) {
+                if (builder.length() > 0) {
+                    builder.append(" ");
+                }
+                builder.append(string);
+            }
+
+            returnName = builder.toString();
+            //Log.d("ReturnName", returnName);
+            return returnName;
+        }
+
+        String output = name.substring(0, 1).toUpperCase() + name.substring(1);
+        //Log.d("Output", output);
+        return output;
+    }
+
+
+
 }
