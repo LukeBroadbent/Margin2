@@ -16,10 +16,15 @@ public class Global_Variables extends Application {
     DatabaseHelper db;
     List<String> entries = new LinkedList<String>();
 
+    //Popup Dialog Types
+    String POPUP_TYPE_NEWUSER = "new_user";
+    String POPUP_TYPE_EXISTINGUSER = "existing_user";
+    String POPUP_TYPE_EDITUSER = "edit_user";
+
+
     public void onCreate()
     {
         super.onCreate();
-
         // Initialize the singletons so their instances
         // are bound to the application process.
         createDatabase(getApplicationContext());
