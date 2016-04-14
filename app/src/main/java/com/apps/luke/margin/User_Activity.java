@@ -55,6 +55,10 @@ public class User_Activity extends Activity {
     Event_Class currentEvent;
     User_Class currentUser;
 
+    Dialog editUsers;
+    Button editUsers_Ok, editUsers_Cancel;
+    EditText editUsers_Name, editUsers_Phone;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -77,6 +81,15 @@ public class User_Activity extends Activity {
 
         sEvents = (Spinner) findViewById(R.id.sEvents);
         sMargins = (Spinner) findViewById(R.id.sEntries);
+
+        editUsers = new Dialog(context);
+        editUsers.setContentView(R.layout.new_user);
+        editUsers.setTitle("Edit User");
+        editUsers_Ok = (Button) editUsers.findViewById(R.id.bConfirm);
+        editUsers_Cancel = (Button) editUsers.findViewById(R.id.bCancel);
+        editUsers_Name = (EditText) editUsers.findViewById(R.id.etName);
+        editUsers_Phone = (EditText) editUsers.findViewById(R.id.etNumber);
+
 
         //db = new DatabaseHelper(getApplicationContext());
 
@@ -481,7 +494,7 @@ public class User_Activity extends Activity {
                             public void onItemClick(AdapterView<?> myAdapter, View myView, int myItemInt, long mylng) {
                                 String selectedFromList = (String) (username.getItemAtPosition(myItemInt));
 
-                                String[] breakdown = selectedFromList.split(" ");
+                                //String[] breakdown = selectedFromList.split(" ");
 
                                 //Sets TextView to show a customer has been selected
 
@@ -501,6 +514,64 @@ public class User_Activity extends Activity {
                                 tvPhone.setText(currentUser.getUser_Phone());
 
                                 dialog.dismiss();
+                            }
+                        });
+
+                        username.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                            @Override
+                            public boolean onItemLongClick(AdapterView<?> myAdapter, View myView, int myItemInt, long mylng)
+                            {
+
+                                //final Dialog dialog = new Dialog(context);
+                                //dialog.setContentView(R.layout.new_user);
+                                //dialog.setTitle("Edit User");
+                                //dialog.show();
+
+                                editUsers.show();
+
+                                //Button ok = (Button) dialog.findViewById(R.id.bConfirm);
+                                //Button cancel = (Button) dialog.findViewById(R.id.bCancel);
+                                //EditText name = (EditText) dialog.findViewById(R.id.etName);
+                                //EditText number = (EditText) dialog.findViewById(R.id.etNumber);
+
+                                String selectedFromList = (String) (username.getItemAtPosition(myItemInt));
+                                for(int i = 0; i < usersList.size(); i++)
+                                {
+                                    if(usersList.get(i).toString().equals(selectedFromList))
+                                    {
+                                        currentUser = usersList.get(i);
+                                    }
+                                }
+
+                                editUsers_Name.setText(currentUser.getUser_Name());
+                                editUsers_Phone.setText(currentUser.getUser_Phone());
+
+                                editUsers_Ok.setOnClickListener(new View.OnClickListener() {
+
+
+                                    @Override
+                                    public void onClick(View v) {
+
+                                        currentUser.setUser_Name(editUsers_Name.getText().toString());
+                                        currentUser.setUser_Phone(editUsers_Phone.getText().toString());
+                                        gv.getDatabase().updateUserDetails(currentUser);
+                                        editUsers.dismiss();
+                                        dialog.dismiss();
+                                        Toast.makeText(User_Activity.this, "User Details Updated", Toast.LENGTH_SHORT).show();
+
+                                    }
+                                });
+
+                                editUsers_Cancel.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        editUsers.dismiss();
+                                    }
+                                });
+
+
+                                return true;
+
                             }
                         });
                     }

@@ -11,7 +11,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,6 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".Admin_Activity"/>
         <activity android:name=".Complete_Activity"/>
         <activity android:name=".Create_Activity"/>
@@ -26,9 +26,10 @@
         <activity android:name=".Past_Activity"/>
         <activity android:name=".User_Activity"/>
         <activity android:name=".Future_Activity"/>
+        <activity android:name=".Text_Activity"/>
+        <activity android:name=".UpdateUser_Activity"/>
+        <activity android:name=".Statistics_Activity"/>
 
     </application>
-
-
-
+    
 </manifest>
