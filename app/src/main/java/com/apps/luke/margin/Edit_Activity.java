@@ -73,6 +73,13 @@ public class Edit_Activity extends Activity {
                         table.removeAllViews();
 
                         List<EventEntry_Class> entries = gv.getDatabase().getEntriesOfEvent(currentEvent.getEvent_ID());
+                        List<EventEntry_Class> numericallySorted = gv.orderNumerically(entries);
+
+                        for(int x=0;x<numericallySorted.size();x++)
+                        {
+                            Log.d("Margin", Integer.toString(numericallySorted.get(x).getEntry_Margin()));
+                        }
+
                         Log.d("Entries Size", Integer.toString(entries.size()));
                         buildTable(entries);
 

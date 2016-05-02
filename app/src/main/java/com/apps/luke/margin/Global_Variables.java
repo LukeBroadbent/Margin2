@@ -5,6 +5,8 @@ import android.content.Context;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -149,6 +151,55 @@ public class Global_Variables extends Application {
         String output = name.substring(0, 1).toUpperCase() + name.substring(1);
         //Log.d("Output", output);
         return output;
+    }
+
+    /*
+    public List<EventEntry_Class> orderAlphabetically(List<EventEntry_Class> unOrderedList)
+    {
+
+        if (unOrderedList.size() > 0) {
+            Collections.sort(unOrderedList, new Comparator<EventEntry_Class>() {
+                @Override
+                public int compare(final EventEntry_Class object1, final EventEntry_Class object2) {
+                    User_Class u1 = db.getUser(object1.getUser_ID());
+                    User_Class u2 = db.getUser(object1.getUser_ID());
+
+                    return object1.get.compareTo(object2.getName());
+                }
+            } );
+        }
+
+
+
+
+
+        return alphabeticalList;
+    }
+    */
+
+    public List<EventEntry_Class> orderNumerically(List<EventEntry_Class> unOrderedList)
+    {
+        if (unOrderedList.size() > 0) {
+            Collections.sort(unOrderedList, new Comparator<EventEntry_Class>() {
+                @Override
+                public int compare(final EventEntry_Class object1, final EventEntry_Class object2) {
+
+                    if (object1.getEntry_Margin() ==
+                            object2.getEntry_Margin())
+                    {
+                        return 0;
+                    }
+                    else if (object1.getEntry_Margin() <
+                            object2.getEntry_Margin())
+                    {
+                        return -1;
+                    }
+                    return 1;
+                }
+            } );
+        }
+
+        return unOrderedList;
     }
 
 
