@@ -153,6 +153,11 @@ public class Global_Variables extends Application {
         return output;
     }
 
+    public void test()
+    {
+        
+    }
+
     /*
     public List<EventEntry_Class> orderAlphabetically(List<EventEntry_Class> unOrderedList)
     {
