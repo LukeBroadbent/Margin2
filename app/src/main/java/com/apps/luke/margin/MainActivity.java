@@ -3,12 +3,14 @@ package com.apps.luke.margin;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -23,6 +25,7 @@ public class MainActivity extends Activity{
 
     protected Global_Variables gv;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -30,8 +33,6 @@ public class MainActivity extends Activity{
         setContentView(R.layout.activity_main);
 
         gv = (Global_Variables) this.getApplication();
-
-
 
         bLogin = (Button) findViewById(R.id.bLogin);
         bEnter = (Button) findViewById(R.id.bEnter);

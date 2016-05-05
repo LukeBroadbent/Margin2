@@ -23,7 +23,7 @@ import java.util.List;
 public class Edit_Activity extends Activity {
 
     Spinner sEvents;
-    TableLayout table;
+    TableLayout tableDisplay;
 
     List<Event_Class> eventList;
     List<String> eventStrings;
@@ -31,6 +31,12 @@ public class Edit_Activity extends Activity {
     Event_Class currentEvent;
 
     Button back;
+
+    TextView tvMargin, tvUserName;
+
+    List<EventEntry_Class> entries;
+    List<EventEntry_Class> numericallySorted;
+    List<EventEntry_Class> alphabeticallySorted;
 
     protected Global_Variables gv;
 
@@ -45,10 +51,16 @@ public class Edit_Activity extends Activity {
         back = (Button) findViewById(R.id.bBack);
 
         sEvents = (Spinner) findViewById(R.id.sEvents);
-        table = (TableLayout) findViewById(R.id.tlTable);
-        table.setStretchAllColumns(true);
-        table.setPadding(5, 5, 5, 5);
+        //table = (TableLayout) findViewById(R.id.tlTable);
 
+
+        tableDisplay = (TableLayout) findViewById(R.id.tableDisplay);
+        tableDisplay.setStretchAllColumns(true);
+        tableDisplay.setPadding(5, 5, 5, 5);
+
+
+        tvUserName = (TextView) findViewById(R.id.tvUserName);
+        tvMargin = (TextView) findViewById(R.id.tvMargin);
 
         eventList = gv.getDatabase().getEventsBasedOnStatus("A");
 
@@ -69,19 +81,29 @@ public class Edit_Activity extends Activity {
                     if (eventList.get(i).getEvent_Name().equals(sEvents.getSelectedItem().toString())) {
 
                         currentEvent = eventList.get(i);
+                        tableDisplay.removeAllViews();
+                        entries = null;
 
-                        table.removeAllViews();
+                        tvUserName.setBackgroundColor(Color.WHITE);
+                        tvMargin.setBackgroundColor(Color.WHITE);
+                        entries = gv.getDatabase().getEntriesOfEvent(currentEvent.getEvent_ID());
+                        //numericallySorted = gv.orderNumerically(entries);
+                        //alphabeticallySorted = gv.orderAlphabetically(entries);
 
-                        List<EventEntry_Class> entries = gv.getDatabase().getEntriesOfEvent(currentEvent.getEvent_ID());
-                        List<EventEntry_Class> numericallySorted = gv.orderNumerically(entries);
 
+
+                        //tvMargin.setBackgroundColor(Color.parseColor("#D3D3D3"));
+
+                        /*
                         for(int x=0;x<numericallySorted.size();x++)
                         {
                             Log.d("Margin", Integer.toString(numericallySorted.get(x).getEntry_Margin()));
                         }
+                        */
 
                         Log.d("Entries Size", Integer.toString(entries.size()));
-                        buildTable(entries);
+                        fillTable(gv.orderNumerically(entries));
+                        tvMargin.setBackgroundColor(Color.parseColor("#D3D3D3"));
 
 
                     }
@@ -98,6 +120,37 @@ public class Edit_Activity extends Activity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+        //tvMargin = new TextView(Edit_Activity.this);
+        tvMargin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("Margin","Pressed");
+                tableDisplay.removeAllViews();
+                fillTable(gv.orderNumerically(entries));
+                tvMargin.setBackgroundColor(Color.parseColor("#D3D3D3"));
+                tvUserName.setBackgroundColor(Color.WHITE);
+
+            }
+        });
+
+        //tvUserName = new TextView(Edit_Activity.this);
+        tvUserName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("Username","Pressed");
+                tableDisplay.removeAllViews();
+                //buildTable();
+
+                tvMargin.setBackgroundColor(Color.WHITE);
+                tvUserName.setBackgroundColor(Color.parseColor("#D3D3D3"));
+                //List<EventEntry_Class> entries = gv.getDatabase().getEntriesOfEvent(currentEvent.getEvent_ID());
+                //List<EventEntry_Class> alphabeticallySorted = gv.orderAlphabetically(entries);
+                //List<EventEntry_Class> alphabeticallySorted = gv.orderAlphabetically(entries);
+                fillTable(gv.orderAlphabetically(entries));
+
             }
         });
 
@@ -125,7 +178,8 @@ public class Edit_Activity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void buildTable(List<EventEntry_Class> entries)
+    /*
+    public void buildTable()
     {
         TableRow trHeader = new TableRow(Edit_Activity.this);
 
@@ -135,13 +189,14 @@ public class Edit_Activity extends Activity {
         tvEntryId.setTypeface(Typeface.DEFAULT_BOLD);
         tvEntryId.setGravity(Gravity.CENTER_HORIZONTAL);
 
-        TextView tvUserName = new TextView(Edit_Activity.this);
+        tvUserName = new TextView(Edit_Activity.this);
         tvUserName.setText("Name");
         tvUserName.setTextColor(Color.BLACK);
         tvUserName.setTypeface(Typeface.DEFAULT_BOLD);
         tvUserName.setGravity(Gravity.CENTER_HORIZONTAL);
 
-        TextView tvMargin = new TextView(Edit_Activity.this);
+
+        tvMargin = new TextView(Edit_Activity.this);
         tvMargin.setText("Margin");
         tvMargin.setTextColor(Color.BLACK);
         tvMargin.setTypeface(Typeface.DEFAULT_BOLD);
@@ -153,16 +208,10 @@ public class Edit_Activity extends Activity {
 
         table.addView(trHeader, new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT));
 
+        /*
         for(int i = 0; i < entries.size(); i++)
         {
             TableRow tr = new TableRow(Edit_Activity.this);
-            //OrderLines.get(x);
-            //tr.setId(x);
-            //tr.setTag(OrderLines_Local.get(x).getProduct_Name());
-            //tr.setLayoutParams(new LayoutParams(
-            //         LayoutParams.WRAP_CONTENT,
-            //         LayoutParams.WRAP_CONTENT));
-
 
             TextView tvEId = new TextView(Edit_Activity.this);
             //tvEId.setText(Integer.toString(entries.get(i).getEntry_ID()));
@@ -184,49 +233,44 @@ public class Edit_Activity extends Activity {
             tvMarg.setGravity(Gravity.CENTER_HORIZONTAL);
             tr.addView(tvMarg);
 
-
-
-            //labelTV.setId(500+x);
-
-
-            //tvEId.setWidth(280);
-            //tvEId.setPadding(0, 0, 20, 15);
-
-
-
             table.addView(tr, new TableLayout.LayoutParams(
                     TableLayout.LayoutParams.WRAP_CONTENT,
                     TableLayout.LayoutParams.WRAP_CONTENT));
-
-
-            //labelTV.setLayoutParams(new LayoutParams(
-            //        LayoutParams.WRAP_CONTENT,
-            //        LayoutParams.WRAP_CONTENT));
-
-            /*
-            TextView tvQty = new TextView(Menu_Order_Generation.this);
-            //labelTV.setId(1000+x);
-            tvQty.setText(Integer.toString(OrderLines_Local.get(x).getOrder_Qty()));
-            tvQty.setTextColor(Color.BLACK);
-            tvQty.setTypeface(myMethods.tfArial);
-            tvQty.setTextAlignment(TextView.TEXT_ALIGNMENT_TEXT_END);
-            //labelTV.setLayoutParams(new LayoutParams(
-            //        LayoutParams.WRAP_CONTENT,
-            //        LayoutParams.WRAP_CONTENT));
-
-            //String custDetails = tempCust.toString();
-            //customerList.add(custDetails);
-
-
-            tr.addView(tvQty);
-
-            table.addView(tr, new TableLayout.LayoutParams(
-                    LayoutParams.WRAP_CONTENT,
-                    LayoutParams.WRAP_CONTENT));
-                */
         }
 
 
     }
+*/
 
+    public void fillTable(List<EventEntry_Class> entries)
+    {
+        for(int i = 0; i < entries.size(); i++)
+        {
+            TableRow tr = new TableRow(Edit_Activity.this);
+
+            TextView tvEId = new TextView(Edit_Activity.this);
+            //tvEId.setText(Integer.toString(entries.get(i).getEntry_ID()));
+            tvEId.setText(Integer.toString(i+1));
+            tvEId.setTextColor(Color.BLACK);
+            tvEId.setGravity(Gravity.CENTER_HORIZONTAL);
+            tr.addView(tvEId);
+
+            TextView tvUN = new TextView(Edit_Activity.this);
+            User_Class u = gv.getDatabase().getUser(entries.get(i).getUser_ID());
+            tvUN.setText(u.getUser_Name());
+            tvUN.setTextColor(Color.BLACK);
+            tvUN.setGravity(Gravity.CENTER_HORIZONTAL);
+            tr.addView(tvUN);
+
+            TextView tvMarg = new TextView(Edit_Activity.this);
+            tvMarg.setText(Integer.toString(entries.get(i).getEntry_Margin()));
+            tvMarg.setTextColor(Color.BLACK);
+            tvMarg.setGravity(Gravity.CENTER_HORIZONTAL);
+            tr.addView(tvMarg);
+
+            tableDisplay.addView(tr, new TableLayout.LayoutParams(
+                    TableLayout.LayoutParams.WRAP_CONTENT,
+                    TableLayout.LayoutParams.WRAP_CONTENT));
+        }
+    }
 }

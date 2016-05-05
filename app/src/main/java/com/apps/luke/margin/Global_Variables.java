@@ -155,10 +155,10 @@ public class Global_Variables extends Application {
 
     public void test()
     {
-        
+
     }
 
-    /*
+
     public List<EventEntry_Class> orderAlphabetically(List<EventEntry_Class> unOrderedList)
     {
 
@@ -167,20 +167,18 @@ public class Global_Variables extends Application {
                 @Override
                 public int compare(final EventEntry_Class object1, final EventEntry_Class object2) {
                     User_Class u1 = db.getUser(object1.getUser_ID());
-                    User_Class u2 = db.getUser(object1.getUser_ID());
+                    User_Class u2 = db.getUser(object2.getUser_ID());
 
-                    return object1.get.compareTo(object2.getName());
+                    return db.getUser(object1.getUser_ID()).getUser_Name().compareTo(db.getUser(object2.getUser_ID()).getUser_Name());
+
+                    //return u1.getUser_Name().compareTo(u2.getUser_Name());
                 }
             } );
         }
 
-
-
-
-
-        return alphabeticalList;
+        return unOrderedList;
     }
-    */
+
 
     public List<EventEntry_Class> orderNumerically(List<EventEntry_Class> unOrderedList)
     {

@@ -255,6 +255,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             returnUser.setUser_Phone(c.getString(2));
         }
 
+        c.close();
+
         return returnUser;
     }
 
