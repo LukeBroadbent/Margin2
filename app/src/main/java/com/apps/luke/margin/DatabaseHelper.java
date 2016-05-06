@@ -348,6 +348,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.update(TABLE_USERS, cv, USER_ID + "=" + u.getUser_ID(), null);
     }
 
+    public void updateAllUserNames(List<User_Class> u)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        ContentValues cv = new ContentValues();
+        for(int i = 0; i < u.size(); i++)
+        {
+            cv.put(USER_NAME,u.get(i).getUser_Name());                                 //These Fields should be your String values of actual column names
+            cv.put(USER_PHONE,u.get(i).getUser_Phone());
+            db.update(TABLE_USERS, cv, USER_ID + "=" + u.get(i).getUser_ID(), null);
+        }
+
+    }
+
     public List<EventEntry_Class> getEventEntriesBasedOnEvent(int event_ID)
     {
         SQLiteDatabase db = this.getReadableDatabase();

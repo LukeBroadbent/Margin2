@@ -3,6 +3,7 @@ package com.apps.luke.margin;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +14,12 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.nio.channels.FileChannel;
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends Activity{
@@ -33,6 +40,51 @@ public class MainActivity extends Activity{
         setContentView(R.layout.activity_main);
 
         gv = (Global_Variables) this.getApplication();
+
+        //gv.capitalizeAllUserNames();
+
+
+        try {
+            File sd = Environment.getExternalStorageDirectory();
+
+            Log.d("External Storage", Environment.getExternalStorageDirectory().getPath());
+
+            //File data = Environment.getDataDirectory();
+
+            if (sd.canWrite()) {
+                String currentDBPath = "/data/data/" + getPackageName() + "/databases/FundraisingDatabase";
+                //String currentDBPath = "//data//{com.app.luke.margin}//databases//{FundraisingDatabase}";
+                //data/data/<Your-Application-Package-Name>/databases/<your-database-name>
+                Log.d("currentPath", currentDBPath);
+                String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+                currentDateTimeString = currentDateTimeString.replaceAll(" ", "");
+                currentDateTimeString = currentDateTimeString.replaceAll(":","");
+                currentDateTimeString = currentDateTimeString.replaceAll("/","");
+                Log.d("Current time", currentDateTimeString);
+
+
+                String backupDBPath = "/marginbackups/" + "hfcmargin-" + currentDateTimeString + ".db";
+
+                Log.d("Backup Path", " " + backupDBPath);
+
+                File currentDB = new File(currentDBPath);
+
+                Log.d("currentDB", Boolean.toString(currentDB.exists()));
+
+                File backupDB = new File(sd, backupDBPath);
+
+                if (currentDB.exists()) {
+                    FileChannel src = new FileInputStream(currentDB).getChannel();
+                    FileChannel dst = new FileOutputStream(backupDB).getChannel();
+                    dst.transferFrom(src, 0, src.size());
+                    src.close();
+                    dst.close();
+                }
+            }
+        } catch (Exception e) {
+
+        }
+
 
         bLogin = (Button) findViewById(R.id.bLogin);
         bEnter = (Button) findViewById(R.id.bEnter);

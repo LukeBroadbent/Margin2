@@ -206,5 +206,17 @@ public class Global_Variables extends Application {
     }
 
 
+    public void capitalizeAllUserNames()
+    {
+        List<User_Class> users = db.getAllUsers();
+        for(int i = 0; i < users.size(); i++)
+        {
+            //String capitalizedName = capitalizeNames(users.get(i).getUser_Name());
+            users.get(i).setUser_Name(capitalizeNames(users.get(i).getUser_Name()));
+            Log.d("Capitalized Name", users.get(i).getUser_Name());
+        }
+
+        db.updateAllUserNames(users);
+    }
 
 }
