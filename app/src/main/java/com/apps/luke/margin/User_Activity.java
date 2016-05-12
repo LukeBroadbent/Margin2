@@ -297,39 +297,6 @@ public class User_Activity extends Activity {
                     return;
                 }
 
-
-                if(tvPhone.getText().toString().equals("0438539689"))
-                {
-                    Toast.makeText(User_Activity.this, "I hope you lose your money krackers", Toast.LENGTH_SHORT).show();
-                }
-                if(tvPhone.getText().toString().equals("0422684645"))
-                {
-                    Toast.makeText(User_Activity.this, "HOCHI MIN FAT, get a haircut", Toast.LENGTH_SHORT).show();
-                }
-                if(tvPhone.getText().toString().equals("0450964601"))
-                {
-                    Toast.makeText(User_Activity.this, "Oi Jake!!!, its time to grab the fire extinguisher", Toast.LENGTH_SHORT).show();
-                }
-                if(tvPhone.getText().toString().equals("0430113210"))
-                {
-                    Toast.makeText(User_Activity.this, "You are a hack hollywood", Toast.LENGTH_SHORT).show();
-                }
-                if(tvPhone.getText().toString().equals("0425373163"))
-                {
-                    Toast.makeText(User_Activity.this, "Queeeeeefin!!!", Toast.LENGTH_SHORT).show();
-                }
-                if(tvPhone.getText().toString().equals("0425373163"))
-                {
-                }
-                if(tvPhone.getText().toString().equals("0425373163"))
-                {
-                }
-                if(tvPhone.getText().toString().equals("0425373163"))
-                {
-                }
-
-
-
                 int entriesCount = Integer.parseInt(sMargins.getSelectedItem().toString());
                 Log.d("entriesCount", Integer.toString(entriesCount));
 
