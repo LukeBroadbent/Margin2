@@ -17,6 +17,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -35,6 +36,7 @@ public class Edit_Activity extends Activity {
     TextView tvMargin, tvUserName;
 
     List<EventEntry_Class> entries;
+    List<EventEntry_Class> nonSelection;
     List<EventEntry_Class> numericallySorted;
     List<EventEntry_Class> alphabeticallySorted;
 
@@ -102,6 +104,9 @@ public class Edit_Activity extends Activity {
                         */
 
                         Log.d("Entries Size", Integer.toString(entries.size()));
+                        //nonSelection = entries;
+                        //addNonSelections(entries);
+                        //fillTable(gv.orderNumerically(nonSelection));
                         fillTable(gv.orderNumerically(entries));
                         tvMargin.setBackgroundColor(Color.parseColor("#D3D3D3"));
 
@@ -150,7 +155,6 @@ public class Edit_Activity extends Activity {
                 //List<EventEntry_Class> alphabeticallySorted = gv.orderAlphabetically(entries);
                 //List<EventEntry_Class> alphabeticallySorted = gv.orderAlphabetically(entries);
                 fillTable(gv.orderAlphabetically(entries));
-
             }
         });
 
@@ -256,8 +260,15 @@ public class Edit_Activity extends Activity {
             tr.addView(tvEId);
 
             TextView tvUN = new TextView(Edit_Activity.this);
-            User_Class u = gv.getDatabase().getUser(entries.get(i).getUser_ID());
-            tvUN.setText(u.getUser_Name());
+            if(entries.get(i).getUser_ID() != 0){
+                User_Class u = gv.getDatabase().getUser(entries.get(i).getUser_ID());
+                tvUN.setText(u.getUser_Name());
+            }
+
+            if(entries.get(i).getUser_ID() == 0){
+                tvUN.setText("Non Selection");
+            }
+
             tvUN.setTextColor(Color.BLACK);
             tvUN.setGravity(Gravity.CENTER_HORIZONTAL);
             tr.addView(tvUN);
@@ -271,6 +282,44 @@ public class Edit_Activity extends Activity {
             tableDisplay.addView(tr, new TableLayout.LayoutParams(
                     TableLayout.LayoutParams.WRAP_CONTENT,
                     TableLayout.LayoutParams.WRAP_CONTENT));
+        }
+    }
+
+    public void addNonSelections(List<EventEntry_Class> entries){
+
+        //Selection Margins
+        List<Integer> selectedMargins = new LinkedList<>();
+        for(int i = 0; i < entries.size(); i++){
+            selectedMargins.add(entries.get(i).getEntry_Margin());
+        }
+
+        //fills all margins
+        List<Integer> allMargins = new LinkedList<Integer>();
+
+        for(int i = 1; i < 101; i++){
+            allMargins.add(i);
+            Log.d("Margin", Integer.toString(i));
+        }
+
+        Log.d("All Margins Size",Integer.toString(allMargins.size()));
+
+        allMargins.removeAll(selectedMargins);
+
+        Log.d("All Margins Size",Integer.toString(allMargins.size()));
+
+        for(int i = 0; i < allMargins.size(); i++){
+            EventEntry_Class e = new EventEntry_Class();
+            e.setUser_ID(0);
+            e.setEntry_Margin(allMargins.get(i));
+            entries.add(e);
+        }
+    }
+
+    public void removeNonSelections(List<EventEntry_Class> entries){
+        for(int i = 0; i < entries.size(); i++){
+            if(entries.get(i).getUser_ID() == 0){
+                entries.remove(i);
+            }
         }
     }
 }

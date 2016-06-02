@@ -2,9 +2,14 @@ package com.apps.luke.margin;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.Menu;
@@ -13,7 +18,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -85,7 +89,6 @@ public class MainActivity extends Activity{
 
         }
 
-
         bLogin = (Button) findViewById(R.id.bLogin);
         bEnter = (Button) findViewById(R.id.bEnter);
         bExit = (Button) findViewById(R.id.bExit);
@@ -103,9 +106,11 @@ public class MainActivity extends Activity{
         bLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String login;
-                String pass;
+                //String login;
+                //String pass;
 
+                startActivity(iAdmin);
+                /*
                 Log.d("Testing Global", GlobalVariables_Class.password);
 
                 if (etLogin.getText() != null && etPassword.getText() != null) {
@@ -131,7 +136,7 @@ public class MainActivity extends Activity{
                     Toast.makeText(getApplicationContext(), "Incorrect Login Details", Toast.LENGTH_LONG).show();
                     return;
                 }
-
+                */
             }
 
         });
@@ -178,6 +183,8 @@ public class MainActivity extends Activity{
         return true;
     }
 
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -192,4 +199,7 @@ public class MainActivity extends Activity{
 
         return super.onOptionsItemSelected(item);
     }
+
+
+
 }

@@ -166,8 +166,12 @@ public class Global_Variables extends Application {
             Collections.sort(unOrderedList, new Comparator<EventEntry_Class>() {
                 @Override
                 public int compare(final EventEntry_Class object1, final EventEntry_Class object2) {
+
                     User_Class u1 = db.getUser(object1.getUser_ID());
                     User_Class u2 = db.getUser(object2.getUser_ID());
+
+                    Log.d("User Class U1", u1.toString());
+                    Log.d("User Class U2", u2.toString());
 
                     return db.getUser(object1.getUser_ID()).getUser_Name().compareTo(db.getUser(object2.getUser_ID()).getUser_Name());
 
