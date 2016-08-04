@@ -103,6 +103,7 @@ public class MainActivity extends Activity{
 
         Log.d("Testing Global", GlobalVariables_Class.password);
 
+
         bLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

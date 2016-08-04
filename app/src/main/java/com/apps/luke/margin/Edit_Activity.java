@@ -66,6 +66,10 @@ public class Edit_Activity extends Activity {
 
         eventList = gv.getDatabase().getEventsBasedOnStatus("A");
 
+        //This line was used to end a bugged event
+        //gv.getDatabase().finishEvent(eventList.get(0).getEvent_ID(), 33);
+
+
         eventStrings = new LinkedList<String>();
 
         for(int i = 0; i < eventList.size(); i++)
@@ -74,6 +78,7 @@ public class Edit_Activity extends Activity {
         }
         eventAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, eventStrings);
         sEvents.setAdapter(eventAdapter);
+
 
         sEvents.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -96,12 +101,12 @@ public class Edit_Activity extends Activity {
 
                         //tvMargin.setBackgroundColor(Color.parseColor("#D3D3D3"));
 
-                        /*
-                        for(int x=0;x<numericallySorted.size();x++)
-                        {
-                            Log.d("Margin", Integer.toString(numericallySorted.get(x).getEntry_Margin()));
-                        }
-                        */
+
+                        //for(int x=0;x<numericallySorted.size();x++)
+                        //{
+                        //    Log.d("Margin", Integer.toString(numericallySorted.get(x).getEntry_Margin()));
+                        //}
+
 
                         Log.d("Entries Size", Integer.toString(entries.size()));
                         //nonSelection = entries;
@@ -120,6 +125,7 @@ public class Edit_Activity extends Activity {
                 // your code here
             }
         });
+
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
