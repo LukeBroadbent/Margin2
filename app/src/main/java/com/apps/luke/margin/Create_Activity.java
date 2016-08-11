@@ -62,6 +62,11 @@ public class Create_Activity extends Activity {
                 String name = eventName.getText().toString();
                 Log.d("EventName", name);
 
+                if(eventName.getText().toString().matches("")){
+                    Toast.makeText(Create_Activity.this, "Enter Event Name", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 //String type = spinner.getSelectedItem().toString();
                 String type = "Margin";
                 Log.d("EventType", type);

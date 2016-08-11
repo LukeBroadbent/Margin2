@@ -144,7 +144,7 @@ public class Complete_Activity extends Activity {
                                 }
 
 
-                                sms.sendTextMessage(winningUser.getUser_Phone(), null, "Congratulation " + winningUser.getUser_Name() + " you have won the " + currentEvent.Event_Name + " margin game", null, null);
+                                sms.sendTextMessage(winningUser.getUser_Phone(), null, "Congratulations " + winningUser.getUser_Name() + " you have won the " + currentEvent.Event_Name + " margin game", null, null);
 
                                 dialog.dismiss();
                                 Toast.makeText(getApplicationContext(), "Message Sent to Winner", Toast.LENGTH_LONG).show();
