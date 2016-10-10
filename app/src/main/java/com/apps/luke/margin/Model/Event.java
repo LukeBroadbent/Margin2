@@ -1,9 +1,9 @@
-package com.apps.luke.margin;
+package com.apps.luke.margin.Model;
 
 /**
  * Created by Luke on 11/30/2015.
  */
-public class Event_Class
+public class Event
 {
     int Event_ID;
     String Event_Type;
@@ -11,7 +11,7 @@ public class Event_Class
     int Event_Final_Margin;
     String Event_Status;
 
-    public Event_Class(int event_ID, String event_Type, String event_Name, int final_margin, String event_Active) {
+    public Event(int event_ID, String event_Type, String event_Name, int final_margin, String event_Active) {
         Event_ID = event_ID;
         Event_Type = event_Type;
         Event_Name = event_Name;
@@ -19,7 +19,7 @@ public class Event_Class
         Event_Status = event_Active;
     }
 
-    public Event_Class() {
+    public Event() {
 
     }
 

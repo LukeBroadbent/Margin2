@@ -1,21 +1,21 @@
-package com.apps.luke.margin;
+package com.apps.luke.margin.Model;
 
 /**
  * Created by Luke on 12/16/2015.
  */
-public class User_Class
+public class User
 {
     int User_ID;
     String User_Name;
     String User_Phone;
 
-    public User_Class(int user_ID, String user_Name, String user_Phone) {
+    public User(int user_ID, String user_Name, String user_Phone) {
         User_ID = user_ID;
         User_Name = user_Name;
         User_Phone = user_Phone;
     }
 
-    public User_Class()
+    public User()
     {
 
     }
