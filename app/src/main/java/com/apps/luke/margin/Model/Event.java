@@ -3,6 +3,8 @@ package com.apps.luke.margin.Model;
 /**
  * Created by Luke on 11/30/2015.
  */
+
+
 public class Event
 {
     int Event_ID;
