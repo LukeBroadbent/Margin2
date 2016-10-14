@@ -1,10 +1,12 @@
 package com.apps.luke.margin.Model;
 
+import lombok.Data;
+
 /**
  * Created by Luke on 11/30/2015.
  */
 
-
+@Data
 public class Event
 {
     int Event_ID;
@@ -22,48 +24,5 @@ public class Event
     }
 
     public Event() {
-
     }
-
-
-    public String getEvent_Type() {
-        return Event_Type;
-    }
-
-    public String getEvent_Name() {
-        return Event_Name;
-    }
-
-    public int getEvent_Final_Margin() {
-        return Event_Final_Margin;
-    }
-
-    public String getEvent_Status() {
-        return Event_Status;
-    }
-
-    public int getEvent_ID() {
-        return Event_ID;
-    }
-
-    public void setEvent_ID(int event_ID) {
-        Event_ID = event_ID;
-    }
-
-    public void setEvent_Type(String event_Type) {
-        Event_Type = event_Type;
-    }
-
-    public void setEvent_Name(String event_Name) {
-        Event_Name = event_Name;
-    }
-
-    public void setEvent_Final_Margin(int event_final_margin) {
-        Event_Final_Margin = event_final_margin;
-    }
-
-    public void setEvent_Status(String event_Status) {
-        Event_Status = event_Status;
-    }
-
 }
