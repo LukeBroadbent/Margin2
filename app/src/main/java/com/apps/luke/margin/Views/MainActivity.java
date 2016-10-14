@@ -29,10 +29,10 @@ import butterknife.OnClick;
 
 public class MainActivity extends Activity {
 
-    private static final String TAG = MarginRootActivity.class.getSimpleName();
+    //private static final String TAG = MarginRootActivity.class.getSimpleName();
 
     //Drawer
-    private DrawerLayout mDrawer;
+    //private DrawerLayout mDrawer;
 
     Button bExit;
 
