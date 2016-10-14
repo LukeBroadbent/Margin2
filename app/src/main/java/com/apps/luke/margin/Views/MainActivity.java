@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.Menu;
@@ -29,14 +30,7 @@ import butterknife.OnClick;
 
 public class MainActivity extends Activity {
 
-    //private static final String TAG = MarginRootActivity.class.getSimpleName();
-
-    //Drawer
-    //private DrawerLayout mDrawer;
-
-    Button bExit;
-
-    Intent iAdmin, iEnter;
+    private static final String TAG = MainActivity.class.getSimpleName();
 
     protected GlobalVariables gv;
 
@@ -46,7 +40,6 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
 
 
         gv = (GlobalVariables) this.getApplication();
@@ -92,58 +85,25 @@ public class MainActivity extends Activity {
         } catch (Exception e) {
 
         }
-
-        //bEnter = (Button) findViewById(R.id.bEnter);
-        bExit = (Button) findViewById(R.id.bExit);
-
-        iAdmin = new Intent(this, AdminActivity.class);
-        iEnter = new Intent(this, UserActivity.class);
-
-
-        /*
-        bEnter.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                List<Event> events = gv.getDatabase().getEventsBasedOnStatus("A");
-                if(events.isEmpty())
-                {
-                    Toast.makeText(getApplicationContext(), "No Active Events", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                startActivity(iEnter);
-            }
-
-        });
-        */
-
-
-        bExit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                finish();
-            }
-        });
-
     }
 
     @OnClick(R.id.bEnter)
-    public void enter(){
+    public void enter() {
         List<Event> events = gv.getDatabase().getEventsBasedOnStatus("A");
-        if(events.isEmpty())
-        {
+        if(events.isEmpty()) {
             Toast.makeText(getApplicationContext(), "No Active Events", Toast.LENGTH_SHORT).show();
             return;
         }
-        startActivity(iEnter);
+        startActivity(new Intent(this, UserActivity.class));
     }
 
     @OnClick(R.id.bLogin)
     public void login(){
-        startActivity(iAdmin);
+        startActivity(new Intent(this, AdminActivity.class));
     }
+
+    @OnClick(R.id.bExit)
+    public void exit(){finish();}
 
 
     @Override
